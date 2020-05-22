@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:pipelineEntry xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con1="http://www.bea.com/wli/sb/stages/config" xmlns:con2="http://www.bea.com/wli/sb/stages/transform/config">
+    <con:coreEntry>
+        <con:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType">
+            <con:wsdl ref="PoC/CICD/Resources/WSDLs/CICDServiceWSDL"/>
+            <con:binding>
+                <con:name>cicdBinding</con:name>
+                <con:namespace>http://www.cicd.net/Services/test</con:namespace>
+            </con:binding>
+        </con:binding>
+        <con:xqConfiguration>
+            <con:snippetVersion>1.0</con:snippetVersion>
+        </con:xqConfiguration>
+    </con:coreEntry>
+    <con:router>
+        <con:pipeline type="request" name="request-N3f57febb.N59f87059.0.17229006536.N7ec1"/>
+        <con:pipeline type="response" name="response-N3f57febb.N59f87059.0.17229006536.N7ec0">
+            <con:stage id="_StageId-N3f57febb.N59f87059.0.17229006536.N7ebe" name="StageResponse">
+                <con:context>
+                    <con1:userNsDecl prefix="test" namespace="http://ww.cicd.net/Schema/test"/>
+                </con:context>
+                <con:actions>
+                    <con2:replace varName="body">
+                        <con1:id>_ActionId-N3f57febb.N59f87059.0.17229006536.N7e57</con1:id>
+                        <con2:expr>
+                            <con1:xqueryText>&lt;test:testRes>
+    &lt;test:resultado>{fn:concat('Hola ', fn:data($body/test:testReq/test:nombre))}&lt;/test:resultado>
+&lt;/test:testRes></con1:xqueryText>
+                        </con2:expr>
+                    </con2:replace>
+                </con:actions>
+            </con:stage>
+        </con:pipeline>
+        <con:flow>
+            <con:pipeline-node name="PipelinePairNodeCICD">
+                <con:request>request-N3f57febb.N59f87059.0.17229006536.N7ec1</con:request>
+                <con:response>response-N3f57febb.N59f87059.0.17229006536.N7ec0</con:response>
+            </con:pipeline-node>
+        </con:flow>
+    </con:router>
+</con:pipelineEntry>

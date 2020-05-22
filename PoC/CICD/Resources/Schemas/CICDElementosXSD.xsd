@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ww.cicd.net/Schema/test"
+            targetNamespace="http://ww.cicd.net/Schema/test" elementFormDefault="qualified">
+  <xsd:element name="testReq" type="tns:testReq"/>
+  <xsd:element name="testRes" type="tns:testRes"/>
+  <xsd:complexType name="testReq">
+    <xsd:sequence>
+        <xsd:element name="nombre" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="testRes">
+    <xsd:sequence>
+        <xsd:element name="resultado" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
